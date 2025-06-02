@@ -1,7 +1,5 @@
 console.log("Hello World!")
-let humanScore = 0;
-let computerScore =0;
-playRound(getHumanChoice(), getComputerChoice());
+playGame();
 function getComputerChoice(){
     let choice = Math.floor(Math.random() * 3) + 1;
     if (choice===1){
@@ -42,25 +40,49 @@ function getHumanChoice(){
 
 function playRound(hChoice, cChoice){
     if(hChoice==cChoice){
-        return console.log("There is tie");
+        console.log("There is tie");
+        return "tie";
     }
     //Rock beats scissors
     else if(hChoice===1 && cChoice===3 ){
-        humanScore +=1;
         console.log("You Win!");
+        return "human";
     }
     //paper beats rock
     else if(hChoice===2 && cChoice===1){
-        humanScore +=1;
-        return console.log("You Win!")
+        console.log("You Win!")
+        return "human";
     }
     //scissors beats paper
     else if(hChoice===3 && cChoice===2 ){
-        humanScore +=1;
-        return console.log("You Win!")
+        console.log("You Win!");
+        return "human";
     }
     else{
-        computerScore +=1;
-        return console.log("Sorry the computer wins!")
+        console.log("Sorry the computer wins!");
+        return "computer";
+    }
+}
+
+function playGame(){
+    let humanScore = 0;
+    let computerScore =0;
+    for(let i=0; i<5; i++){
+        const result = playRound(getHumanChoice(), getComputerChoice());
+        if(result ==="human"){
+            humanScore+=1;
+        }
+        else if(result ==="computer"){
+            computerScore+=1
+        }
+    }
+    if(humanScore>computerScore){
+        return console.log("YOU WIN THE ENTIRE GAME");
+    }
+    else if(humanScore===computerScore){
+        return console.log("The whole game is a tie. How did you manage to do that?");
+    }
+    else{
+        return console.log("Computer Wins the ENTIRE GAME");
     }
 }
